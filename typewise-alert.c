@@ -11,28 +11,27 @@ BreachType inferBreach(double value, double lowerLimit, double upperLimit) {
   return NORMAL;
 }
 
-void setLimits(CoolingType coolingType, int *lowerLimit, int *upperLimit) 
+void setLimits(CoolingType coolingType, int *upperLimit) 
 {
-  switch(coolingType) {
-    case PASSIVE_COOLING:
-      *lowerLimit = 0;
-      *upperLimit = 35;
-      break;
-    case HI_ACTIVE_COOLING:
-      *lowerLimit = 0;
-      *upperLimit = 45;
-      break;
-    case MED_ACTIVE_COOLING:
-      *lowerLimit = 0;
-      *upperLimit = 40;
-      break;
+  if(coolingType == PASSIVE_COOLING) 
+  {    
+      return;
   }
+  else if(coolingType == HI_ACTIVE_COOLING)      
+  {    
+      *upperLimit = 45;
+  }
+  else
+  {
+      *upperLimit = 40;
+  } 
+
 }
 
 void checkBreachType(AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC) {
   int lowerLimit = 0;
-  int upperLimit = 0; 
-  setLimits(batteryChar.coolingType, &lowerLimit, &upperLimit);
+  int upperLimit = 35; 
+  setLimits(batteryChar.coolingType, &upperLimit);
   BreachType breachType = inferBreach(temperatureInC, lowerLimit, upperLimit);
 }
 
@@ -59,10 +58,15 @@ void sendToController(BreachType breachType) {
   
 }
 
-printMessageLowTemp(char* recepient)
+printMessageTemp(char* recepient, BreachType breachType)
 {
     printf("To: %s\n", recepient);
-    printf("Hi, the temperature is too low\n");
+    if(breachType == TOO_LOW)
+    {
+        printf("Hi, the temperature is too low\n");
+        return ;
+    }
+    printf("Hi, the temperature is too high\n");
 }
 
 printMessageHighTemp(char* recepient)
@@ -73,14 +77,10 @@ printMessageHighTemp(char* recepient)
 
 void sendToEmail(BreachType breachType) {
   const char* recepient = "a.b@c.com";
-  switch(breachType) {
-    case TOO_LOW:
-     printMessageLowTemp(recepient);
-      break;
-    case TOO_HIGH:
-      printMessageHighTemp(recepient);
-      break;
-    case NORMAL:
-      break;
+  if(breachType == NORMAL)
+  {
+      return ;
   }
+  printMessageTemp(recepient, breachType);
+    
 }

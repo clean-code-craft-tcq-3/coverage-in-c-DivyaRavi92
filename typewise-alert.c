@@ -33,6 +33,7 @@ BreachType checkBreachType(BatteryCharacter batteryChar, double temperatureInC) 
   int upperLimit = 35; 
   setLimits(batteryChar.coolingType, &upperLimit);
   BreachType breachType = inferBreach(temperatureInC, lowerLimit, upperLimit);
+  return breachType;
 }
 
 void  alertTarget(AlertTarget alertTarget, BreachType breachType)

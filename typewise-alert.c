@@ -64,7 +64,7 @@ void printMessageTemp(const char* recepient, BreachType breachType)
     if(breachType == TOO_LOW)
     {
         printf("Hi, the temperature is too low\n");
-        return 0;
+        return ;
     }
     printf("Hi, the temperature is too high\n");
 }
@@ -73,7 +73,7 @@ void sendToEmail(BreachType breachType) {
   const char* recepient = "a.b@c.com";
   if(breachType == NORMAL)
   {
-      return 0 ;
+      return  ;
   }
   printMessageTemp(recepient, breachType);
     

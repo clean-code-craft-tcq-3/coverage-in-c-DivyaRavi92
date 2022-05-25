@@ -19,4 +19,8 @@ TEST_CASE("Alerts target based on breach type") {
 TEST_CASE("Checks the breach type") {
   BatteryCharacter batteryChar = {PASSIVE_COOLING,{0}};
   REQUIRE(checkBreachType(batteryChar, 40) == TOO_HIGH);
+  BatteryCharacter batteryChar = {HI_ACTIVE_COOLING,{0}};
+  REQUIRE(checkBreachType(batteryChar, 40) == NORMAL);
+  BatteryCharacter batteryChar = {MED_ACTIVE_COOLING,{0}};
+  REQUIRE(checkBreachType(batteryChar, -2) == T00_LOW);
 }

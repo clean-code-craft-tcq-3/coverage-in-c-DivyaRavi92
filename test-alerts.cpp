@@ -13,6 +13,7 @@ TEST_CASE("Alerts target based on breach type") {
   alertTarget(TO_CONTROLLER, TOO_LOW);
   alertTarget(TO_CONTROLLER, TOO_HIGH);
   alertTarget(TO_EMAIL, TOO_HIGH);
+  alertTarget(TO_EMAIL, TOO_LOW);
   alertTarget(TO_EMAIL, NORMAL);
 }
 

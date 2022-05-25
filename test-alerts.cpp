@@ -15,6 +15,7 @@ TEST_CASE("Alerts target based on breach type") {
   alertTarget(TO_EMAIL, TOO_HIGH);
   alertTarget(TO_EMAIL, TOO_LOW);
   alertTarget(TO_EMAIL, NORMAL);
+  alertTarget(NIL, NORMAL);
 }
 
 TEST_CASE("Checks the breach type PASSIVE_COOLING") {

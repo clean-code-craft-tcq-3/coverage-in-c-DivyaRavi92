@@ -16,7 +16,8 @@ BreachType inferBreach(double value, double lowerLimit, double upperLimit);
 
 typedef enum {
   TO_CONTROLLER,
-  TO_EMAIL
+  TO_EMAIL,
+  NIL
 } AlertTarget;
 
 typedef struct {

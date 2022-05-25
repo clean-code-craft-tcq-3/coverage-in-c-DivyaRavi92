@@ -16,11 +16,15 @@ TEST_CASE("Alerts target based on breach type") {
   alertTarget(TO_EMAIL, NORMAL);
 }
 
-TEST_CASE("Checks the breach type") {
+TEST_CASE("Checks the breach type PASSIVE_COOLING") {
   BatteryCharacter batteryChar = {PASSIVE_COOLING,{0}};
   REQUIRE(checkBreachType(batteryChar, 40) == TOO_HIGH);
+}  
+TEST_CASE("Checks the breach type HI_ACTIVE_COOLING") {
   BatteryCharacter batteryChar = {HI_ACTIVE_COOLING,{0}};
   REQUIRE(checkBreachType(batteryChar, 40) == NORMAL);
+}  
+TEST_CASE("Checks the breach type MED_ACTIVE_COOLING") {
   BatteryCharacter batteryChar = {MED_ACTIVE_COOLING,{0}};
-  REQUIRE(checkBreachType(batteryChar, -2) == T00_LOW);
+  REQUIRE(checkBreachType(batteryChar, -2) == TOO_LOW);
 }

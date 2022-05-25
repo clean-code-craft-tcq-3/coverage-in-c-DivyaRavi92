@@ -28,7 +28,7 @@ void setLimits(CoolingType coolingType, int *upperLimit)
 
 }
 
-void checkBreachType(AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC) {
+BreachType checkBreachType(BatteryCharacter batteryChar, double temperatureInC) {
   int lowerLimit = 0;
   int upperLimit = 35; 
   setLimits(batteryChar.coolingType, &upperLimit);
@@ -47,7 +47,7 @@ void  alertTarget(AlertTarget alertTarget, BreachType breachType)
   }
 }
 
-printControllerMessage(unsigned short header, BreachType breachType)
+void printControllerMessage(unsigned short header, BreachType breachType)
 {
     printf("%x : %x\n", header, breachType);
 }
@@ -58,20 +58,14 @@ void sendToController(BreachType breachType) {
   
 }
 
-printMessageTemp(char* recepient, BreachType breachType)
+void printMessageTemp(const char* recepient, BreachType breachType)
 {
     printf("To: %s\n", recepient);
     if(breachType == TOO_LOW)
     {
         printf("Hi, the temperature is too low\n");
-        return ;
+        return 0;
     }
-    printf("Hi, the temperature is too high\n");
-}
-
-printMessageHighTemp(char* recepient)
-{
-    printf("To: %s\n", recepient);
     printf("Hi, the temperature is too high\n");
 }
 
@@ -79,7 +73,7 @@ void sendToEmail(BreachType breachType) {
   const char* recepient = "a.b@c.com";
   if(breachType == NORMAL)
   {
-      return ;
+      return 0 ;
   }
   printMessageTemp(recepient, breachType);
     

@@ -11,5 +11,12 @@ TEST_CASE("infers the breach according to limits") {
 
 TEST_CASE("Alerts target based on breach type") {
   alertTarget(TO_CONTROLLER, TOO_LOW);
+  alertTarget(TO_CONTROLLER, TOO_HIGH);
   alertTarget(TO_EMAIL, TOO_HIGH);
+  alertTarget(TO_EMAIL, NORMAL);
+}
+
+TEST_CASE("Checks the breach type") {
+  BatteryCharacter batteryChar = {PASSIVE_COOLING,{0}};
+  REQUIRE(checkBreachType(batteryChar, 20) == NORMAL);
 }

@@ -2,7 +2,7 @@
 
 #include "test/catch.hpp"
 #include "typewise-alert.h"
-#include "Stdbool.h"
+#include "stdbool.h"
 
 bool isDummyControllerInvoked = false;
 bool isDummyEmailInvoked = false;

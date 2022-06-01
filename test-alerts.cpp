@@ -2,6 +2,38 @@
 
 #include "test/catch.hpp"
 #include "typewise-alert.h"
+#include "bool.h"
+
+bool isDummyControllerInvoked = false;
+bool isDummyEmailInvoked = false;
+int dummyContollerCallCount = 0;
+int dummyEmailCallCount = 0;
+
+void sendToControllerdummy(breachType)
+{
+  isDummyControllerInvoked = true;
+  dummyContollerCallCount +=1;
+}
+
+void sendToEmaildummy(breachType)
+{
+  isDummyEmailInvoked = true;
+  dummyEmailCallCount +=1;
+}
+
+int  alertTarget(AlertTarget alertTarget, BreachType breachType)
+{
+  switch(alertTarget) {
+    case TO_CONTROLLER:
+      sendToControllerdummy(breachType);
+      return dummyContollerCallCount;
+      break;
+    case TO_EMAIL:
+      sendToEmaildummy(breachType);
+      return dummyEmailCallCount;
+      break;
+  }
+}
 
 TEST_CASE("infers the breach according to limits") {
   REQUIRE(inferBreach(12, 20, 30) == TOO_LOW);
@@ -10,12 +42,12 @@ TEST_CASE("infers the breach according to limits") {
 }
 
 TEST_CASE("Alerts target based on breach type") {
-  alertTarget(TO_CONTROLLER, TOO_LOW);
-  alertTarget(TO_CONTROLLER, TOO_HIGH);
-  alertTarget(TO_EMAIL, TOO_HIGH);
-  alertTarget(TO_EMAIL, TOO_LOW);
-  alertTarget(TO_EMAIL, NORMAL);
-  alertTarget(NIL, NORMAL);
+  REQUIRE(alertTarget(TO_CONTROLLER, TOO_LOW) == 1);
+  REQUIRE(alertTarget(TO_CONTROLLER, TOO_HIGH) == 2);
+  REQUIRE(alertTarget(TO_EMAIL, TOO_HIGH) == 1);
+  REQUIRE(alertTarget(TO_EMAIL, TOO_LOW) == 2);
+  REQUIRE(alertTarget(TO_EMAIL, NORMAL) == 3);
+  //REQUIRE(alertTarget(NIL, NORMAL);
 }
 
 TEST_CASE("Checks the breach type PASSIVE_COOLING") {

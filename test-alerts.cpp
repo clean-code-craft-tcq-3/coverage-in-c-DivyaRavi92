@@ -9,13 +9,13 @@ bool isDummyEmailInvoked = false;
 int dummyContollerCallCount = 0;
 int dummyEmailCallCount = 0;
 
-void sendToControllerdummy(breachType)
+void sendToControllerdummy(BreachType breachType)
 {
   isDummyControllerInvoked = true;
   dummyContollerCallCount +=1;
 }
 
-void sendToEmaildummy(breachType)
+void sendToEmaildummy(BreachType breachType)
 {
   isDummyEmailInvoked = true;
   dummyEmailCallCount +=1;

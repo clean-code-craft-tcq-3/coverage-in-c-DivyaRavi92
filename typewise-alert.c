@@ -36,16 +36,20 @@ BreachType checkBreachType(BatteryCharacter batteryChar, double temperatureInC) 
   return breachType;
 }
 
-void  alertTarget(AlertTarget alertTarget, BreachType breachType)
+int alertTarget(AlertTarget alertTarget, BreachType breachType)
 {
+  int targetAlerted = 0;
   switch(alertTarget) {
     case TO_CONTROLLER:
-      sendToController(breachType);
+      targetAlerted = sendToController(breachType);
       break;
     case TO_EMAIL:
-      sendToEmail(breachType);
+      targetAlerted = sendToEmail(breachType);
+      break;
+    default:
       break;
   }
+  return targetAlerted;
 }
 
 void printControllerMessage(unsigned short header, BreachType breachType)
@@ -53,10 +57,10 @@ void printControllerMessage(unsigned short header, BreachType breachType)
     printf("%x : %x\n", header, breachType);
 }
 
-void sendToController(BreachType breachType) {
+int sendToController(BreachType breachType) {
   const unsigned short header = 0xfeed;
   printControllerMessage(header,breachType);
-  
+  return 1;
 }
 
 void printMessageTemp(const char* recepient, BreachType breachType)
@@ -70,12 +74,12 @@ void printMessageTemp(const char* recepient, BreachType breachType)
     printf("Hi, the temperature is too high\n");
 }
 
-void sendToEmail(BreachType breachType) {
+int sendToEmail(BreachType breachType) {
   const char* recepient = "a.b@c.com";
   if(breachType == NORMAL)
   {
-      return  ;
+      return 2;
   }
   printMessageTemp(recepient, breachType);
-    
+  return 2; 
 }

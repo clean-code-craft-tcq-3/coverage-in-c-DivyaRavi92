@@ -25,9 +25,9 @@ typedef struct {
 } BatteryCharacter;
 
 BreachType checkBreachType(BatteryCharacter batteryChar, double temperatureInC);
-void  alertTarget(AlertTarget alertTarget, BreachType breachType);
-void sendToController(BreachType breachType);
-void sendToEmail(BreachType breachType);
+int alertTarget(AlertTarget alertTarget, BreachType breachType);
+int sendToController(BreachType breachType);
+int sendToEmail(BreachType breachType);
 void setLimits(CoolingType coolingType, int *upperLimit);
 void printControllerMessage(unsigned short header, BreachType breachType);
 void printMessageTemp(const char* recepient, BreachType breachType);

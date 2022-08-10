@@ -4,37 +4,6 @@
 #include "typewise-alert.h"
 #include "stdbool.h"
 
-bool isDummyControllerInvoked = false;
-bool isDummyEmailInvoked = false;
-int dummyContollerCallCount = 0;
-int dummyEmailCallCount = 0;
-
-void sendToControllerdummy(BreachType breachType)
-{
-  isDummyControllerInvoked = true;
-  dummyContollerCallCount +=1;
-}
-
-void sendToEmaildummy(BreachType breachType)
-{
-  isDummyEmailInvoked = true;
-  dummyEmailCallCount +=1;
-}
-
-int  alertTarget(AlertTarget alertTarget, BreachType breachType)
-{
-  switch(alertTarget) {
-    case TO_CONTROLLER:
-      sendToControllerdummy(breachType);
-      return dummyContollerCallCount;
-      break;
-    case TO_EMAIL:
-      sendToEmaildummy(breachType);
-      return dummyEmailCallCount;
-      break;
-  }
-}
-
 TEST_CASE("infers the breach according to limits") {
   REQUIRE(inferBreach(12, 20, 30) == TOO_LOW);
   REQUIRE(inferBreach(42, 20, 30) == TOO_HIGH);

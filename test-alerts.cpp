@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
 
 #include "test/catch.hpp"
-#include "typewise-alert.h"
+#include "typewiseAlert.h"
 #include "stdbool.h"
 
 TEST_CASE("infers the breach according to limits") {
@@ -16,7 +16,6 @@ TEST_CASE("Alerts target based on breach type") {
   REQUIRE(alertTarget(TO_EMAIL, TOO_HIGH) == 2);
   REQUIRE(alertTarget(TO_EMAIL, TOO_LOW) == 2);
   REQUIRE(alertTarget(TO_EMAIL, NORMAL) == 2);
-  //REQUIRE(alertTarget(NIL, NORMAL);
 }
 
 TEST_CASE("Checks the breach type PASSIVE_COOLING") {

@@ -12,10 +12,10 @@ TEST_CASE("infers the breach according to limits") {
 
 TEST_CASE("Alerts target based on breach type") {
   REQUIRE(alertTarget(TO_CONTROLLER, TOO_LOW) == 1);
-  REQUIRE(alertTarget(TO_CONTROLLER, TOO_HIGH) == 2);
-  REQUIRE(alertTarget(TO_EMAIL, TOO_HIGH) == 1);
+  REQUIRE(alertTarget(TO_CONTROLLER, TOO_HIGH) == 1);
+  REQUIRE(alertTarget(TO_EMAIL, TOO_HIGH) == 2);
   REQUIRE(alertTarget(TO_EMAIL, TOO_LOW) == 2);
-  REQUIRE(alertTarget(TO_EMAIL, NORMAL) == 3);
+  REQUIRE(alertTarget(TO_EMAIL, NORMAL) == 2);
   //REQUIRE(alertTarget(NIL, NORMAL);
 }
 
